@@ -630,12 +630,15 @@ class ImagePainterState extends State<ImagePainter> {
             ),
           ),
           if (!widget.controlsAtTop && widget.showControls) _buildControls(),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: paintModes(textDelegate)
-                  .map(
-                    (item) => SelectionItems(
+          SizedBox(
+            height: 100,
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemCount: paintModes(textDelegate).length,
+              itemBuilder: (context, index) {
+                final item = paintModes(textDelegate)[index];
+                return SelectionItems(
                   data: item,
                   isSelected: _controller.mode == item.mode,
                   selectedColor: widget.optionSelectedColor,
@@ -646,17 +649,14 @@ class ImagePainterState extends State<ImagePainter> {
                     }
                     _controller.setMode(item.mode);
 
-                    setState(() {
-
-                    });
+                    setState(() {});
 
                     if (item.mode == PaintMode.text) {
                       _openTextDialog();
                     }
                   },
-                ),
-              )
-                  .toList(),
+                );
+              },
             ),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom)
@@ -1024,7 +1024,8 @@ class ImagePainterState extends State<ImagePainter> {
             },
           ),
           IconButton(
-            icon: widget.saveIcon ?? Icon(Icons.save_alt, color: Colors.grey[700]),
+            icon: widget.saveIcon ??
+                Icon(Icons.save_alt, color: Colors.grey[700]),
             onPressed: () {
               widget.onSave?.call();
             },
