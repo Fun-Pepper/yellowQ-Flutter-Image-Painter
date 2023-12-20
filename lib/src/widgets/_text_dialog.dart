@@ -59,7 +59,7 @@ class TextDialog extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomCenter,
             child: TextButton(
               child: Text(
                 textDelegate.done,
