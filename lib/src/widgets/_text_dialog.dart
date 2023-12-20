@@ -60,15 +60,18 @@ class TextDialog extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: TextButton(
-              child: Text(
-                textDelegate.done,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+            child: Container(
+              margin: const EdgeInsets.only(top: 26),
+              child: TextButton(
+                child: Text(
+                  textDelegate.done,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                onPressed: onFinished,
               ),
-              onPressed: onFinished,
             ),
           ),
         ],
