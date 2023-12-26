@@ -631,8 +631,34 @@ class ImagePainterState extends State<ImagePainter> {
           ),
           if (!widget.controlsAtTop && widget.showControls) _buildControls(),
           SizedBox(
-            height: 100,
-            child: ListView.builder(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: paintModes(textDelegate)
+                  .map(
+                    (item) => SelectionItems(
+                      data: item,
+                      isSelected: _controller.mode == item.mode,
+                      selectedColor: widget.optionSelectedColor,
+                      unselectedColor: widget.optionUnselectedColor,
+                      onTap: () {
+                        if (widget.onPaintModeChanged != null) {
+                          widget.onPaintModeChanged!(item.mode);
+                        }
+                        _controller.setMode(item.mode);
+
+                        setState(() {});
+
+                        if (item.mode == PaintMode.text) {
+                          _openTextDialog(context);
+                        }
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+/*            child: ListView.builder(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.horizontal,
               itemCount: paintModes(textDelegate).length,
@@ -657,7 +683,7 @@ class ImagePainterState extends State<ImagePainter> {
                   },
                 );
               },
-            ),
+            ),*/
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom)
         ],

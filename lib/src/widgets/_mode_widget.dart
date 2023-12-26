@@ -51,30 +51,43 @@ class SelectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButtonWithIcon(
-      onPressed: () {
-        if (null != onTap) {
-          onTap!();
-        }
-      },
-      icon: Icon(
-        data.icon,
-        color: isSelected
-            ? selectedColor ?? Theme.of(context).colorScheme.primary
-            : unselectedColor ?? const Color(0xFF666666),
-      ),
-      label: Text(
-        data.label,
-        style: isSelected
-            ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                )
-            : Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: const Color(0xFF666666),
-                  fontWeight: FontWeight.normal,
-                ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Icon(
+          data.icon,
+          size: 26,
+          color: isSelected
+              ? selectedColor ?? Theme.of(context).colorScheme.primary
+              : unselectedColor ?? const Color(0xFF666666),
+        ),
       ),
     );
+    // return FlatButtonWithIcon(
+    //   onPressed: () {
+    //     if (null != onTap) {
+    //       onTap!();
+    //     }
+    //   },
+    //   icon: Icon(
+    //     data.icon,
+    //     color: isSelected
+    //         ? selectedColor ?? Theme.of(context).colorScheme.primary
+    //         : unselectedColor ?? const Color(0xFF666666),
+    //   ),
+    //   label: Text(
+    //     data.label,
+    //     style: isSelected
+    //         ? Theme.of(context).textTheme.titleMedium?.copyWith(
+    //               color: Theme.of(context).colorScheme.primary,
+    //             )
+    //         : Theme.of(context).textTheme.titleMedium?.copyWith(
+    //               color: const Color(0xFF666666),
+    //               fontWeight: FontWeight.normal,
+    //             ),
+    //   ),
+    // );
     // return Container(
     //   margin: const EdgeInsets.symmetric(vertical: 2.0),
     //   decoration: BoxDecoration(
