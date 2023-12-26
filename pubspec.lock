@@ -22,6 +22,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_smart_dialog:
+    dependency: "direct main"
+    description:
+      name: flutter_smart_dialog
+      sha256: "2157a52bf809357d0062e511cabba7dceb6b9499994ebf68aaf083bff07c8741"
+      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
+    source: hosted
+    version: "4.9.5+2"
   js:
     dependency: transitive
     description:
@@ -61,4 +69,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=3.0.0"

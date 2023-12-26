@@ -26,8 +26,8 @@ class FlatButtonWithIcon extends TextButton {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               icon,
-              const SizedBox(height: 5.0),
-              label,
+              // const SizedBox(height: 5.0),
+              // label,
             ],
           ),
         );
@@ -51,35 +51,59 @@ class SelectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 2.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.0),
-        color: isSelected ? Colors.blue : Colors.transparent,
+    return FlatButtonWithIcon(
+      onPressed: () {
+        if (null != onTap) {
+          onTap!();
+        }
+      },
+      icon: Icon(
+        data.icon,
+        color: isSelected
+            ? selectedColor ?? Theme.of(context).colorScheme.primary
+            : unselectedColor ?? const Color(0xFF666666),
       ),
-      child: ListTile(
-        leading: IconTheme(
-          data: const IconThemeData(opacity: 1.0),
-          child: Icon(
-            data.icon,
-            color: isSelected
-                ? selectedColor ?? Colors.white
-                : unselectedColor ?? Colors.black,
-          ),
-        ),
-        title: Text(
-          data.label,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: isSelected
-                    ? Colors.white
-                    : Theme.of(context).textTheme.bodyLarge?.color,
-              ),
-        ),
-        onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-        selected: isSelected,
+      label: Text(
+        data.label,
+        style: isSelected
+            ? Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                )
+            : Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: const Color(0xFF666666),
+                  fontWeight: FontWeight.normal,
+                ),
       ),
     );
+    // return Container(
+    //   margin: const EdgeInsets.symmetric(vertical: 2.0),
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(4.0),
+    //     color: isSelected ? Colors.blue : Colors.transparent,
+    //   ),
+    //   child: ListTile(
+    //     leading: IconTheme(
+    //       data: const IconThemeData(opacity: 1.0),
+    //       child: Icon(
+    //         data.icon,
+    //         color: isSelected
+    //             ? selectedColor ?? Colors.white
+    //             : unselectedColor ?? Colors.black,
+    //       ),
+    //     ),
+    //     title: Text(
+    //       data.label,
+    //       style: Theme.of(context).textTheme.titleMedium?.copyWith(
+    //             color: isSelected
+    //                 ? Colors.white
+    //                 : Theme.of(context).textTheme.bodyLarge?.color,
+    //           ),
+    //     ),
+    //     onTap: onTap,
+    //     contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+    //     selected: isSelected,
+    //   ),
+    // );
   }
 }
 

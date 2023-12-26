@@ -630,35 +630,35 @@ class ImagePainterState extends State<ImagePainter> {
             ),
           ),
           if (!widget.controlsAtTop && widget.showControls) _buildControls(),
-          // SizedBox(
-          //   height: 100,
-          //   child: ListView.builder(
-          //     padding: EdgeInsets.zero,
-          //     scrollDirection: Axis.horizontal,
-          //     itemCount: paintModes(textDelegate).length,
-          //     itemBuilder: (context, index) {
-          //       final item = paintModes(textDelegate)[index];
-          //       return SelectionItems(
-          //         data: item,
-          //         isSelected: _controller.mode == item.mode,
-          //         selectedColor: widget.optionSelectedColor,
-          //         unselectedColor: widget.optionUnselectedColor,
-          //         onTap: () {
-          //           if (widget.onPaintModeChanged != null) {
-          //             widget.onPaintModeChanged!(item.mode);
-          //           }
-          //           _controller.setMode(item.mode);
-          //
-          //           setState(() {});
-          //
-          //           if (item.mode == PaintMode.text) {
-          //             _openTextDialog();
-          //           }
-          //         },
-          //       );
-          //     },
-          //   ),
-          // ),
+          SizedBox(
+            height: 100,
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.horizontal,
+              itemCount: paintModes(textDelegate).length,
+              itemBuilder: (context, index) {
+                final item = paintModes(textDelegate)[index];
+                return SelectionItems(
+                  data: item,
+                  isSelected: _controller.mode == item.mode,
+                  selectedColor: widget.optionSelectedColor,
+                  unselectedColor: widget.optionUnselectedColor,
+                  onTap: () {
+                    if (widget.onPaintModeChanged != null) {
+                      widget.onPaintModeChanged!(item.mode);
+                    }
+                    _controller.setMode(item.mode);
+
+                    setState(() {});
+
+                    if (item.mode == PaintMode.text) {
+                      _openTextDialog(context);
+                    }
+                  },
+                );
+              },
+            ),
+          ),
           SizedBox(height: MediaQuery.of(context).padding.bottom)
         ],
       ),
@@ -826,7 +826,7 @@ class ImagePainterState extends State<ImagePainter> {
 
                       Navigator.of(context).pop();
                       if (item.mode == PaintMode.text) {
-                        _openTextDialog();
+                        _openTextDialog(context);
                       }
                     },
                   ),
@@ -911,7 +911,7 @@ class ImagePainterState extends State<ImagePainter> {
     }
   }
 
-  void _openTextDialog() {
+  void _openTextDialog(BuildContext context) {
     _controller.setMode(PaintMode.text);
     final fontSize = 6 * _controller.strokeWidth;
     TextDialog.show(
@@ -933,7 +933,6 @@ class ImagePainterState extends State<ImagePainter> {
           );
           _textController.clear();
         }
-        Navigator.of(context).pop();
       },
     );
   }
@@ -944,22 +943,22 @@ class ImagePainterState extends State<ImagePainter> {
       color: widget.controlsBackgroundColor ?? Colors.grey[200],
       child: Row(
         children: [
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (_, __) {
-              final icon = paintModes(textDelegate)
-                  .firstWhere((item) => item.mode == _controller.mode)
-                  .icon;
-              return PopupMenuButton(
-                tooltip: textDelegate.changeMode,
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                icon: Icon(icon, color: widget.optionColor ?? Colors.grey[700]),
-                itemBuilder: (_) => [_showOptionsRow()],
-              );
-            },
-          ),
+          // AnimatedBuilder(
+          //   animation: _controller,
+          //   builder: (_, __) {
+          //     final icon = paintModes(textDelegate)
+          //         .firstWhere((item) => item.mode == _controller.mode)
+          //         .icon;
+          //     return PopupMenuButton(
+          //       tooltip: textDelegate.changeMode,
+          //       shape: ContinuousRectangleBorder(
+          //         borderRadius: BorderRadius.circular(40),
+          //       ),
+          //       icon: Icon(icon, color: widget.optionColor ?? Colors.grey[700]),
+          //       itemBuilder: (_) => [_showOptionsRow()],
+          //     );
+          //   },
+          // ),
           AnimatedBuilder(
             animation: _controller,
             builder: (_, __) {
